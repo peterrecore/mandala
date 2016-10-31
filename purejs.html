@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="mandala.css" rel="stylesheet">
+    <script type="text/javascript" src="jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="paper-full.js"></script>
+    <script type="text/javascript" src="mandala.js"></script>
+    <script type="text/javascript" src="vue.js"></script>
+
+    <!-- Define inlined JavaScript -->
+    <script type="text/javascript">
+    // Only executed our code once the DOM is ready.
+    $(document).ready(function(){
+        mandalaMain();
+    });
+    </script>
+</head>
+<body>
+    <div class="mycontainer">
+      <canvas id="myCanvas" height="500" width="500"></canvas>
+      <div id="app">
+        <div v-for="ring in rings">
+            Ring {{ring.index}}
+            <canvas v-bind:id="'ring-' + ring.index + '-preview'" class="ring-preview" height="100" width="100"/>
+        </div>
+    </div>
+    <div id="ringforms">
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+.ring-form {
+    max-width:250px;
+    display:inline-block;
+    vertical-align: bottom;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+input.form-control , button.btn-up, button.btn-down, .form-horizontal label.control-label{
+    height:24px;
+    padding-top:1px;
+    padding-bottom:1px;
+}
+
+canvas.ring-preview{
+    height:100px;
+    width:100px;
+    display:inline-block;
+    vertial-align:top;
+}

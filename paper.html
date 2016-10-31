@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Load the Paper.js library -->
+<script type="text/javascript" src="paper.js"></script>
+<!-- Define inlined PaperScript associate it with myCanvas -->
+<script type="text/paperscript" canvas="myCanvas">
+
+	var center = new Shape.Circle({x:0,y:0},10)
+    center.strokeColor='pink';
+
+	var myPath = new Path();
+    myPath.strokeColor = 'red';
+    myPath.add(new Point(20, 20));
+    myPath.add(new Point(100, 50));
+    myPath.add(new Point(125, 125));
+    myPath.add(new Point(50,100));
+    myPath.closed=true;
+    myPath.rotate(45);
+
+    
+    var symbol = new Symbol(myPath);
+
+    
+    var blueSym = new Symbol(myPath.clone());
+    blueSym.place();
+    blueSym.definition.strokeColor = 'blue';
+
+    for (var x=0;x<=7;x++){
+      var rot = symbol.place({x:0,y:0});
+      rot.position.y -= 100;
+      rot.strokeColor = 'blue';  
+      rot.rotate(45*x,new Point(0,0));
+    }
+
+    
+    
+
+    function renderLayer(ring) {
+       var path = new Path();
+       path.strokeColor = 'black';
+       var i;
+       for (i=0;i < ring.shape.length;i++){
+       	  path.add(ring.shape[i]);
+       }
+       path.closed=true;
+       path.rotate(ring.rotate);
+
+       var symbol = new Symbol(path);
+       
+       var degreesPerShape = 360 / ring.repeat;
+
+       for (i = 0 ; i < ring.repeat ; i++){
+       	  var s = symbol.place({x:0,y:0});
+       	  s.position.y -= ring.translate;
+       	  s.rotate(degreesPerShape*i + ring.spinOffset, {x:0,y:0});
+       }
+	};
+
+    
+    function test_ring(){
+    	var a = {};
+		a.rotate = 0;
+	    a.repeat = 4;
+	    a.scale = 1;
+	    a.translate = 120;
+	    a.spinOffset = 22.5;
+	    a.shape=[{x:0,y:0},{x:0,y:40},{x:13,y:12}];
+		return a;
+    };
+
+	renderLayer(test_ring());
+
+    project.activeLayer.position = new Point(500,500);
+
+
+</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize="true" height=1000 width=1000></canvas>
+</body>
+</html>
